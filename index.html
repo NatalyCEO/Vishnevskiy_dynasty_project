@@ -1341,19 +1341,20 @@
                 <h2 class="section-title">Интерактивный симулятор</h2>
                 <div class="simulator-container">
                     <div class="simulator-header">
-                        <h3 class="simulator-title">Сделай блокаду</h3>
-                        <div class="simulator-subtitle">Примените метод новокаиновой блокады А.В. Вишневского</div>
+                        <h3 class="simulator-title">Сделай новокаиновую блокаду почки</h3>
+                        <div class="simulator-subtitle">Метод А.В. Вишневского</div>
                     </div>
                     
                     <div class="simulator-body">
                         <div class="simulator-instructions">
-                            <p><strong>Задача:</strong> Определите правильные точки для введения новокаина по методу А.В. Вишневского для проведения блокады почки.</p>
-                            <p>Кликайте на точки инъекций на схеме. Зеленые точки — правильные, красные — неправильные. Нужно найти все 4 правильные точки для успешного выполнения блокады.</p>
+                            <p><strong>Задача:</strong> Выполните новокаиновую блокаду правой почки по методу А.В. Вишневского.</p>
+                            <p>Кликните по точкам на схеме, куда нужно ввести новокаин. Нужно найти <strong>все 4 правильные точки</strong>. Правильные точки не подсвечиваются заранее — ориентируйтесь по анатомии.</p>
+                            <p>Зелёный цвет появится только после правильного выбора, красный — при ошибке.</p>
                         </div>
                         
                         <div class="simulator-game">
-                            <div class="human-scheme">
-                                <!-- Анатомические элементы -->
+                            <div class="human-scheme" style="background-image: url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80&blend=000000&blend-alpha=10&blend-mode=overlay&sat=-100');">
+                                <!-- Анатомические ориентиры -->
                                 <div class="spine"></div>
                                 <div class="rib rib-1"></div>
                                 <div class="rib rib-2"></div>
@@ -1364,25 +1365,22 @@
                                 <div class="rib rib-7"></div>
                                 <div class="rib rib-8"></div>
                                 
-                                <!-- Органы -->
-                                <div class="organ kidney" data-organ="kidney">Почка</div>
-                                <div class="organ lung" data-organ="lung">Легкое</div>
-                                
-                                <!-- Точки инъекций (правильные и неправильные) -->
-                                <div class="injection-point correct" style="top: 170px; left: 80px;" data-point="1"></div>
-                                <div class="injection-point correct" style="top: 190px; left: 75px;" data-point="2"></div>
-                                <div class="injection-point incorrect" style="top: 140px; left: 140px;" data-point="3"></div>
-                                <div class="injection-point correct" style="top: 200px; left: 120px;" data-point="4"></div>
-                                <div class="injection-point incorrect" style="top: 160px; left: 200px;" data-point="5"></div>
-                                <div class="injection-point incorrect" style="top: 220px; left: 160px;" data-point="6"></div>
-                                <div class="injection-point correct" style="top: 220px; left: 100px;" data-point="7"></div>
-                                <div class="injection-point incorrect" style="top: 180px; left: 160px;" data-point="8"></div>
+                                <!-- Точки инъекций (координаты подогнаны под анатомию правой почки) -->
+                                <div class="injection-point correct" style="top: 195px; left: 170px;" data-point="1"></div>  <!-- паравертебрально справа, уровень Th12-L1 -->
+                                <div class="injection-point correct" style="top: 215px; left: 150px;" data-point="2"></div>  <!-- ниже ребра -->
+                                <div class="injection-point correct" style="top: 235px; left: 180px;" data-point="4"></div>  <!-- латеральнее -->
+                                <div class="injection-point correct" style="top: 255px; left: 165px;" data-point="7"></div>  <!-- каудальнее -->
+        
+                                <div class="injection-point incorrect" style="top: 170px; left: 140px;" data-point="3"></div>
+                                <div class="injection-point incorrect" style="top: 190px; left: 220px;" data-point="5"></div>
+                                <div class="injection-point incorrect" style="top: 240px; left: 120px;" data-point="6"></div>
+                                <div class="injection-point incorrect" style="top: 210px; left: 200px;" data-point="8"></div>
                             </div>
                             
                             <div class="simulator-controls">
                                 <div class="simulator-info">
-                                    <div class="info-title">Метод новокаиновой блокады</div>
-                                    <p>Александр Васильевич Вишневский разработал этот метод в 1920-х годах. Блокада позволяет обезболить конкретную область без общего наркоза, что особенно важно в полевых условиях.</p>
+                                    <div class="info-title">Новокаиновая блокада по Вишневскому</div>
+                                    <p>Метод позволяет быстро и эффективно обезболить орган путём введения новокаина в окружающие ткани и паравертебрально, прерывая болевые импульсы без общего наркоза. Особенно ценен в полевых условиях.</p>
                                 </div>
                                 
                                 <div class="simulator-stats">
@@ -1412,14 +1410,14 @@
                                 
                                 <div class="historical-note" id="historicalNote">
                                     <div class="note-title">Историческая справка</div>
-                                    <p class="note-text">Вы успешно применили принцип новокаиновой блокады А.В. Вишневского. Его сын, Александр Александрович Вишневский, использовал этот метод в 1945 году для лечения авитаминоза у солдат на Дальнем Востоке. Блокада помогала улучшить кровоснабжение тканей и способствовала быстрому восстановлению организма даже в сложных полевых условиях.</p>
+                                    <p class="note-text">Вы успешно выполнили новокаиновую блокаду правой почки по методу А.В. Вишневского. Этот приём активно использовался его сыном Александром Александровичем во время Великой Отечественной войны и на Дальнем Востоке в 1945 году для лечения тяжёлых состояний и восстановления солдат.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>    
+        </section> 
     </main> 
 
     <!-- Footer -->
