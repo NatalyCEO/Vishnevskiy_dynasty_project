@@ -700,402 +700,599 @@
                 padding: 20px;
             }
         }
-        /* Интерактивный симулятор */
-        .simulator-section {
-            background-color: #f8f9fa;
-            padding: 80px 0;
-            border-top: 1px solid #eaeaea;
-            border-bottom: 1px solid #eaeaea;
+        .simulator-stage {
+            display: none;
+            animation: fadeIn 0.5s ease;
         }
-
-        .simulator-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: var(--shadow);
-            overflow: hidden;
+        
+        .simulator-stage.active {
+            display: block;
         }
-
-        .simulator-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            color: white;
-            padding: 25px 30px;
+        
+        .stage-header {
             text-align: center;
-        }
-
-        .simulator-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        .simulator-subtitle {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        .simulator-body {
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .simulator-instructions {
-            text-align: center;
-            max-width: 800px;
             margin-bottom: 30px;
-            line-height: 1.7;
-            color: var(--text-color);
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eee;
         }
-
-        .simulator-game {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-        }
-
-        .human-scheme {
-            position: relative;
-            width: 300px;
-            height: 500px;
-            background-color: #f5f5f5;
-            border-radius: 15px;
-            border: 3px solid #ddd;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .organ {
-            position: absolute;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 500;
-            font-size: 0.9rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-        }
-
-        .organ:hover {
-            transform: scale(1.05);
-        }
-
-        .organ.kidney {
-            background-color: #7b1fa2;
-            width: 100px;
-            height: 60px;
-            top: 180px;
-            left: 100px;
-        }
-
-        .organ.lung {
-            background-color: #0288d1;
-            width: 120px;
-            height: 80px;
-            top: 120px;
-            left: 90px;
-        }
-
-        .injection-point {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: #ff5722;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 3px solid white;
-            box-shadow: 0 0 0 2px #ff5722, 0 0 10px rgba(255, 87, 34, 0.5);
-            transition: all 0.3s ease;
-            z-index: 10;
-        }
-
-        .injection-point:hover {
-            transform: scale(1.3);
-            box-shadow: 0 0 0 3px white, 0 0 15px rgba(255, 87, 34, 0.8);
-        }
-
-        .injection-point.correct {
-            background-color: #4caf50;
-            box-shadow: 0 0 0 2px #4caf50, 0 0 10px rgba(76, 175, 80, 0.5);
-            animation: pulse 2s infinite;
-        }
-
-        .injection-point.incorrect {
-            background-color: #f44336;
-            box-shadow: 0 0 0 2px #f44336;
-        }
-
-        .injection-point.clicked {
-            transform: scale(1.5);
-            box-shadow: 0 0 20px rgba(255, 87, 34, 0.9);
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
-        }
-
-        .simulator-controls {
-            flex: 1;
-            max-width: 400px;
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        .simulator-info {
-            background-color: #f0f7ff;
-            border-left: 4px solid var(--accent-color);
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-
-        .info-title {
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-        }
-
-        .simulator-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .stat-box {
-            background-color: #f5f5f5;
-            padding: 15px;
-            border-radius: 8px;
-            text-align: center;
-            border-top: 3px solid var(--primary-color);
-        }
-
-        .stat-value {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 5px;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--text-light);
-        }
-
-        .btn-simulator {
+        
+        .stage-number {
+            display: inline-block;
             background-color: var(--accent-color);
             color: white;
-            border: none;
-            padding: 14px 25px;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            line-height: 40px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .stage-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .stage-description {
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .patient-case {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+        
+        .patient-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .patient-img {
+            width: 200px;
+            height: 300px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            position: relative;
+            border: 2px solid #ddd;
+            background-image: url('https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .wound-indicator {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: rgba(198, 40, 40, 0.7);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px var(--secondary-color);
+            animation: pulse 2s infinite;
+        }
+        
+        .patient-details {
             text-align: center;
-            width: 100%;
-            margin-top: 10px;
         }
-
-        .btn-simulator:hover {
-            background-color: #1565c0;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(21, 101, 192, 0.3);
+        
+        .patient-details h5 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
         }
-
-        .btn-simulator:disabled {
-            background-color: #cccccc;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
+        
+        .patient-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 0.9rem;
         }
-
-        .btn-simulator.secondary {
-            background-color: #6c757d;
+        
+        .patient-stats span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-color);
         }
-
-        .btn-simulator.secondary:hover {
-            background-color: #5a6268;
+        
+        .case-description h5 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
         }
-
-        .feedback-message {
-            display: none;
+        
+        .symptoms {
+            background-color: #f8f9fa;
             padding: 20px;
             border-radius: 8px;
             margin-top: 20px;
-            text-align: center;
-            font-weight: 500;
-            animation: fadeIn 0.5s ease;
+            border-left: 4px solid var(--accent-color);
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .feedback-success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-            display: block;
-        }
-
-        .feedback-error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-            display: block;
-        }
-
-        .feedback-info {
-            background-color: #d1ecf1;
-            color: #0c5460;
-            border: 1px solid #bee5eb;
-            display: block;
-        }
-
-        .historical-note {
-            background-color: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 20px;
-            margin-top: 25px;
-            border-radius: 8px;
-            display: none;
-            animation: fadeIn 0.8s ease;
-        }
-
-        .historical-note.show {
-            display: block;
-        }
-
-        .note-title {
-            font-weight: 700;
-            color: #856404;
+        
+        .symptoms h6 {
+            color: var(--primary-color);
             margin-bottom: 10px;
-            font-size: 1.1rem;
         }
-
-        .note-text {
-            line-height: 1.6;
-            color: #856404;
+        
+        .symptoms ul {
+            list-style-type: none;
+            padding-left: 0;
         }
-
-        /* Анатомические линии на схеме */
-        .human-scheme {
+        
+        .symptoms li {
+            padding: 5px 0;
+            padding-left: 25px;
             position: relative;
-            width: 300px;
-            height: 500px;
-            background-image: url('https://www.researchgate.net/publication/335349205/figure/fig2/AS:1093597898244096@1637745465487/Anatomical-location-of-paravertebral-block-PVB-and-distribution-of-local-anesthetic-on.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-color: #f9f9f9;
-            border-radius: 15px;
-            border: 3px solid #ddd;
+        }
+        
+        .symptoms li:before {
+            content: '•';
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        .diagnosis-options {
+            margin-bottom: 30px;
+        }
+        
+        .diagnosis-options h5 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .option-btn {
+            background-color: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 10px;
+        }
+        
+        .option-btn:hover {
+            border-color: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.1);
+        }
+        
+        .option-btn i {
+            font-size: 2rem;
+            color: var(--accent-color);
+        }
+        
+        .option-btn span {
+            font-weight: 500;
+            color: var(--text-color);
+        }
+        
+        .option-btn small {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+        
+        .stage-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .stage-progress {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .progress-bar {
+            width: 200px;
+            height: 8px;
+            background-color: #eee;
+            border-radius: 4px;
             overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
         }
-
-        /* Позвоночник */
-        .spine {
+        
+        .progress-fill {
+            height: 100%;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+        
+        .result-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        
+        .result-card.correct {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .result-card.incorrect {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        
+        .result-card i {
+            font-size: 1.5rem;
+            margin-top: 5px;
+        }
+        
+        .treatment-options {
+            margin-bottom: 30px;
+        }
+        
+        .medical-tips {
+            margin-bottom: 30px;
+        }
+        
+        .tip-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .tip-card i {
+            font-size: 1.5rem;
+            margin-top: 5px;
+        }
+        
+        .hospital-management {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .resources-panel, .patients-queue {
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .resources-panel h5, .patients-queue h5 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .resources-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .resource-item {
+            display: grid;
+            grid-template-columns: 50px 1fr 80px;
+            gap: 15px;
+            align-items: center;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .resource-item:hover {
+            background-color: #e9ecef;
+        }
+        
+        .resource-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .resource-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .resource-name {
+            font-weight: 500;
+            color: var(--text-color);
+        }
+        
+        .resource-count {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .resource-controls {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .resource-controls button {
+            width: 35px;
+            height: 35px;
+            background-color: white;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .resource-controls button:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+        
+        .patients-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .patient-queue-item {
+            display: grid;
+            grid-template-columns: 50px 1fr 80px;
+            gap: 15px;
+            align-items: center;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .patient-queue-item.urgent {
+            background-color: #ffeaea;
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .patient-priority {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+        
+        .results-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .final-stats {
+            margin-bottom: 40px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .stat-card {
+            background-color: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            border-top: 4px solid var(--primary-color);
+        }
+        
+        .stat-card .stat-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .stat-card .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .historical-comparison {
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .comparison-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .comparison-item {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .comparison-label {
+            font-weight: 500;
+            color: var(--text-color);
+        }
+        
+        .comparison-bar {
+            height: 30px;
+            background-color: #eee;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .bar-fill {
+            height: 100%;
+            border-radius: 15px;
+            position: relative;
+            transition: width 1s ease;
+        }
+        
+        .bar-fill.player {
+            background-color: var(--accent-color);
+        }
+        
+        .bar-fill.historical {
+            background-color: var(--primary-color);
+        }
+        
+        .bar-fill.average {
+            background-color: #6c757d;
+        }
+        
+        .bar-value {
             position: absolute;
-            width: 10px;
-            height: 360px;
-            background-color: rgba(100, 100, 100, 0.6);
-            top: 100px;
-            left: 145px;
-            border-radius: 5px;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
-
-        /* Рёбра (примерные) */
-        .rib {
-            position: absolute;
-            width: 140px;
-            height: 6px;
-            background-color: rgba(150, 150, 150, 0.5);
-            border-radius: 3px;
+        
+        .achievement-badge {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 25px;
         }
-        .rib-1 { top: 120px; left: 80px; transform: rotate(3deg); }
-        .rib-2 { top: 150px; left: 75px; transform: rotate(6deg); }
-        .rib-3 { top: 180px; left: 70px; transform: rotate(8deg); }
-        .rib-4 { top: 210px; left: 75px; transform: rotate(6deg); }
-        .rib-5 { top: 240px; left: 80px; transform: rotate(3deg); }
-        .rib-6 { top: 270px; left: 85px; transform: rotate(0deg); }
-
+        
+        .achievement-badge i {
+            font-size: 3rem;
+            color: #b8860b;
+        }
+        
+        .historical-facts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .fact-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .fact-card i {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-top: 5px;
+        }
+        
         /* Адаптивность */
-        @media (max-width: 768px) {
-            .simulator-game {
-                flex-direction: column;
-            }
-            
-            .human-scheme {
-                width: 280px;
-                height: 450px;
-            }
-            
-            .organ.kidney {
-                top: 160px;
-                left: 90px;
-            }
-            
-            .organ.lung {
-                top: 100px;
-                left: 80px;
-            }
-            
-            .simulator-controls {
-                max-width: 100%;
-            }
-            
-            .simulator-title {
-                font-size: 1.6rem;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .human-scheme {
-                width: 250px;
-                height: 400px;
-            }
-            
-            .organ {
-                font-size: 0.8rem;
-            }
-            
-            .organ.kidney {
-                width: 80px;
-                height: 50px;
-                top: 150px;
-                left: 85px;
-            }
-            
-            .organ.lung {
-                width: 100px;
-                height: 65px;
-                top: 90px;
-                left: 75px;
-            }
-            
-            .injection-point {
-                width: 16px;
-                height: 16px;
-            }
-            
-            .simulator-stats {
+        @media (max-width: 992px) {
+            .patient-case {
                 grid-template-columns: 1fr;
             }
+            
+            .hospital-management {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .stage-navigation {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-item {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .patient-img {
+                width: 150px;
+                height: 225px;
+            }
+            
+            .resource-item {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .resource-controls {
+                justify-content: center;
+            }
+            
+            .patient-queue-item {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+        
+        /* Анимации */
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.7; }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         /* Книга наследия - Достижения и память */
         .legacy-book {
@@ -2410,80 +2607,379 @@
         </section>
         <section id="simulator" class="simulator-section">
             <div class="container">
-                <h2 class="section-title">Интерактивный симулятор</h2>
+                <h2 class="section-title">Хирург войны: от диагностики до решения</h2>
                 <div class="simulator-container">
                     <div class="simulator-header">
-                        <h3 class="simulator-title">Новокаиновая блокада правой почки</h3>
-                        <div class="simulator-subtitle">По методу А.В. Вишневского</div>
+                        <h3 class="simulator-title">Симулятор военного хирурга</h3>
+                        <div class="simulator-subtitle">По мотивам работы А.А. Вишневского на фронте</div>
                     </div>
                     
                     <div class="simulator-body">
-                        <div class="simulator-instructions">
-                            <p><strong>Задача:</strong> Выполните футлярную новокаиновую блокаду правой почки.</p>
-                            <p>Кликните по <strong>4 правильным точкам</strong> введения новокаина. Ориентируйтесь по анатомии: паравертебрально справа и в области почечного футляра.</p>
-                            <p>Все точки изначально красные. Зелёный — правильная точка (после клика), красный с обводкой — ошибка.</p>
-                        </div>
-                        
-                        <div class="simulator-game">
-                            <div class="human-scheme">
-                                <!-- Анатомические ориентиры -->
-                                <div class="spine"></div>
-                                <div class="rib rib-1"></div>
-                                <div class="rib rib-2"></div>
-                                <div class="rib rib-3"></div>
-                                <div class="rib rib-4"></div>
-                                <div class="rib rib-5"></div>
-                                <div class="rib rib-6"></div>
-                                
-                                <!-- Точки инъекций (все изначально просто injection-point, без correct/incorrect) -->
-                                <div class="injection-point" style="top: 220px; left: 140px;" data-point="1"></div> <!-- Правильная: паравертебрально справа, верх -->
-                                <div class="injection-point" style="top: 260px; left: 135px;" data-point="2"></div> <!-- Правильная: паравертебрально ниже -->
-                                <div class="injection-point" style="top: 240px; left: 180px;" data-point="4"></div> <!-- Правильная: латерально в футляре -->
-                                <div class="injection-point" style="top: 280px; left: 170px;" data-point="7"></div> <!-- Правильная: каудально -->
-        
-                                <div class="injection-point" style="top: 200px; left: 120px;" data-point="3"></div> <!-- Неправильная -->
-                                <div class="injection-point" style="top: 240px; left: 100px;" data-point="5"></div> <!-- Неправильная -->
-                                <div class="injection-point" style="top: 300px; left: 150px;" data-point="6"></div> <!-- Неправильная -->
-                                <div class="injection-point" style="top: 220px; left: 200px;" data-point="8"></div> <!-- Неправильная -->
+                        <!-- Этап 1: Диагностика -->
+                        <div class="simulator-stage active" id="stage1">
+                            <div class="stage-header">
+                                <div class="stage-number">Этап 1</div>
+                                <h4 class="stage-title">Диагностика ранений</h4>
+                                <p class="stage-description">Определите тип ранения по описанию и симптомам</p>
                             </div>
                             
-                            <div class="simulator-controls">
-                                <div class="simulator-info">
-                                    <div class="info-title">О методе Вишневского</div>
-                                    <p>Футлярная новокаиновая блокада прерывает болевые импульсы, создавая "новокаиновый футляр" вокруг органа. Использовалась в войну для лечения ранений живота и почек без общего наркоза.</p>
-                                </div>
-                                
-                                <div class="simulator-stats">
-                                    <div class="stat-box">
-                                        <div class="stat-value" id="pointsFound">0</div>
-                                        <div class="stat-label">Найдено точек</div>
+                            <div class="patient-case">
+                                <div class="patient-info">
+                                    <div class="patient-img">
+                                        <div class="wound-indicator" style="top: 30%; left: 40%;"></div>
+                                        <div class="wound-indicator" style="top: 60%; left: 35%;"></div>
                                     </div>
-                                    <div class="stat-box">
-                                        <div class="stat-value" id="pointsTotal">4</div>
-                                        <div class="stat-label">Всего нужно</div>
-                                    </div>
-                                    <div class="stat-box">
-                                        <div class="stat-value" id="attemptsCount">0</div>
-                                        <div class="stat-label">Попыток</div>
-                                    </div>
-                                    <div class="stat-box">
-                                        <div class="stat-value" id="accuracy">0%</div>
-                                        <div class="stat-label">Точность</div>
+                                    <div class="patient-details">
+                                        <h5>Раненый №1</h5>
+                                        <div class="patient-stats">
+                                            <span><i class="fas fa-heartbeat"></i> Пульс: 110 уд/мин</span>
+                                            <span><i class="fas fa-tint"></i> Кровопотеря: умеренная</span>
+                                            <span><i class="fas fa-temperature-high"></i> Температура: 37.8°C</span>
+                                        </div>
                                     </div>
                                 </div>
                                 
-                                <div class="feedback-message" id="feedbackMessage"></div>
-                                
-                                <button class="btn-simulator" id="checkButton">Проверить блокаду</button>
-                                <button class="btn-simulator secondary" id="resetButton">Начать заново</button>
-                                <button class="btn-simulator secondary" id="hintButton">Подсказка</button>
-                                
-                                <div class="historical-note" id="historicalNote">
-                                    <div class="note-title">Историческая справка</div>
-                                    <p class="note-text">Поздравляем! Вы выполнили футлярную новокаиновую блокаду правой почки по методу А.В. Вишневского. Этот приём спас тысячи жизней на фронтах, позволяя оперировать и обезболивать в полевых условиях.</p>
+                                <div class="case-description">
+                                    <h5>Описание случая:</h5>
+                                    <p>Солдат доставлен с передовой после минометного обстрела. Жалуется на сильную боль в правой половине грудной клетки, усиливающуюся при дыхании. Дыхание поверхностное, учащенное. При осмотре: раневое отверстие в 6-м межреберье по среднеключичной линии справа, из раны выделяется пенистая кровь, слышен звук "подсасывания" воздуха.</p>
+                                    
+                                    <div class="symptoms">
+                                        <h6>Ключевые симптомы:</h6>
+                                        <ul>
+                                            <li>Рана в грудной клетке с "подсасыванием" воздуха</li>
+                                            <li>Пенистая кровь из раны</li>
+                                            <li>Одышка и боль при дыхании</li>
+                                            <li>Подкожная эмфизема (скопление воздуха под кожей)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="diagnosis-options">
+                                <h5>Выберите диагноз:</h5>
+                                <div class="options-grid">
+                                    <button class="option-btn" data-diagnosis="open-pneumothorax">
+                                        <i class="fas fa-lungs"></i>
+                                        <span>Открытый пневмоторакс</span>
+                                    </button>
+                                    <button class="option-btn" data-diagnosis="abdominal-wound">
+                                        <i class="fas fa-stomach"></i>
+                                        <span>Ранение живота</span>
+                                    </button>
+                                    <button class="option-btn" data-diagnosis="fracture">
+                                        <i class="fas fa-bone"></i>
+                                        <span>Перелом ребер</span>
+                                    </button>
+                                    <button class="option-btn" data-diagnosis="hemothorax">
+                                        <i class="fas fa-tint"></i>
+                                        <span>Гемоторакс</span>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="stage-navigation">
+                                <button class="btn-simulator" id="confirmDiagnosis">Подтвердить диагноз</button>
+                                <div class="stage-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 25%"></div>
+                                    </div>
+                                    <span>Этап 1 из 4</span>
                                 </div>
                             </div>
                         </div>
+                        
+                        <!-- Этап 2: Лечение -->
+                        <div class="simulator-stage" id="stage2">
+                            <div class="stage-header">
+                                <div class="stage-number">Этап 2</div>
+                                <h4 class="stage-title">Выбор метода лечения</h4>
+                                <p class="stage-description">Выберите оптимальный метод лечения на основе диагноза</p>
+                            </div>
+                            
+                            <div class="diagnosis-result">
+                                <div class="result-card correct">
+                                    <i class="fas fa-check-circle"></i>
+                                    <div>
+                                        <h5>Диагноз установлен верно: <strong>Открытый пневмоторакс</strong></h5>
+                                        <p>При открытом пневмотораксе воздух поступает в плевральную полость через рану, что приводит к спадению легкого. Необходимо срочно превратить открытый пневмоторакс в закрытый.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="treatment-options">
+                                <h5>Выберите метод лечения:</h5>
+                                <div class="options-grid">
+                                    <button class="option-btn treatment-option" data-treatment="ointment">
+                                        <i class="fas fa-prescription-bottle"></i>
+                                        <span>Мазь Вишневского</span>
+                                        <small>Для лечения инфицированных ран</small>
+                                    </button>
+                                    <button class="option-btn treatment-option" data-treatment="blockade">
+                                        <i class="fas fa-syringe"></i>
+                                        <span>Новокаиновая блокада</span>
+                                        <small>Для обезболивания раны</small>
+                                    </button>
+                                    <button class="option-btn treatment-option" data-treatment="occlusive">
+                                        <i class="fas fa-band-aid"></i>
+                                        <span>Окклюзионная повязка</span>
+                                        <small>Герметизация раны грудной клетки</small>
+                                    </button>
+                                    <button class="option-btn treatment-option" data-treatment="surgery">
+                                        <i class="fas fa-cut"></i>
+                                        <span>Срочная операция</span>
+                                        <small>Торакотомия, ушивание раны</small>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="medical-tips">
+                                <div class="tip-card">
+                                    <i class="fas fa-lightbulb"></i>
+                                    <p><strong>Памятка Вишневского:</strong> При открытом пневмотораксе первая помощь — наложение герметичной (окклюзионной) повязки. Только после этого можно эвакуировать раненого.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="stage-navigation">
+                                <button class="btn-simulator secondary" id="backToDiagnosis">← Назад</button>
+                                <button class="btn-simulator" id="confirmTreatment">Выбрать лечение</button>
+                                <div class="stage-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 50%"></div>
+                                    </div>
+                                    <span>Этап 2 из 4</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Этап 3: Организация -->
+                        <div class="simulator-stage" id="stage3">
+                            <div class="stage-header">
+                                <div class="stage-number">Этап 3</div>
+                                <h4 class="stage-title">Организация работы госпиталя</h4>
+                                <p class="stage-description">Распределите ресурсы как главный хирург фронта</p>
+                            </div>
+                            
+                            <div class="treatment-result">
+                                <div class="result-card correct">
+                                    <i class="fas fa-check-circle"></i>
+                                    <div>
+                                        <h5>Метод лечения выбран верно: <strong>Окклюзионная повязка</strong></h5>
+                                        <p>Окклюзионная повязка с вазелиновой марлей создает герметичность, предотвращает поступление воздуха в плевральную полость и стабилизирует состояние раненого.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="hospital-management">
+                                <div class="resources-panel">
+                                    <h5>Ресурсы полевого госпиталя:</h5>
+                                    <div class="resources-grid">
+                                        <div class="resource-item">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-user-md"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <span class="resource-name">Хирурги</span>
+                                                <span class="resource-count" id="surgeonsCount">4</span>
+                                            </div>
+                                            <div class="resource-controls">
+                                                <button class="resource-minus">-</button>
+                                                <button class="resource-plus">+</button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="resource-item">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-procedures"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <span class="resource-name">Операционные</span>
+                                                <span class="resource-count" id="operatingRoomsCount">2</span>
+                                            </div>
+                                            <div class="resource-controls">
+                                                <button class="resource-minus">-</button>
+                                                <button class="resource-plus">+</button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="resource-item">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-capsules"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <span class="resource-name">Аптечные наборы</span>
+                                                <span class="resource-count" id="medKitsCount">12</span>
+                                            </div>
+                                            <div class="resource-controls">
+                                                <button class="resource-minus">-</button>
+                                                <button class="resource-plus">+</button>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="resource-item">
+                                            <div class="resource-icon">
+                                                <i class="fas fa-ambulance"></i>
+                                            </div>
+                                            <div class="resource-info">
+                                                <span class="resource-name">Санитарный транспорт</span>
+                                                <span class="resource-count" id="transportCount">3</span>
+                                            </div>
+                                            <div class="resource-controls">
+                                                <button class="resource-minus">-</button>
+                                                <button class="resource-plus">+</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="patients-queue">
+                                    <h5>Очередь раненых:</h5>
+                                    <div class="patients-list">
+                                        <div class="patient-queue-item urgent">
+                                            <span class="patient-id">#1</span>
+                                            <span class="patient-condition">Открытый пневмоторакс</span>
+                                            <span class="patient-priority">Срочно</span>
+                                        </div>
+                                        <div class="patient-queue-item">
+                                            <span class="patient-id">#2</span>
+                                            <span class="patient-condition">Огнестрельное ранение бедра</span>
+                                            <span class="patient-priority">Планово</span>
+                                        </div>
+                                        <div class="patient-queue-item urgent">
+                                            <span class="patient-id">#3</span>
+                                            <span class="patient-condition">Проникающее ранение живота</span>
+                                            <span class="patient-priority">Срочно</span>
+                                        </div>
+                                        <div class="patient-queue-item">
+                                            <span class="patient-id">#4</span>
+                                            <span class="patient-condition">Контузия, перелом руки</span>
+                                            <span class="patient-priority">Планово</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="management-tips">
+                                        <div class="tip-card">
+                                            <i class="fas fa-clipboard-list"></i>
+                                            <p><strong>Задача:</strong> Распределите ресурсы так, чтобы прооперировать всех срочных раненых сегодня, а плановых — в течение 2 дней. Помните: у Вишневского возвращали в строй 85% раненых!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="stage-navigation">
+                                <button class="btn-simulator secondary" id="backToTreatment">← Назад</button>
+                                <button class="btn-simulator" id="confirmResources">Завершить организацию</button>
+                                <div class="stage-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 75%"></div>
+                                    </div>
+                                    <span>Этап 3 из 4</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Этап 4: Итоги -->
+                        <div class="simulator-stage" id="stage4">
+                            <div class="stage-header">
+                                <div class="stage-number">Этап 4</div>
+                                <h4 class="stage-title">Итоги работы</h4>
+                                <p class="stage-description">Результаты ваших решений и сравнение с историческими данными</p>
+                            </div>
+                            
+                            <div class="results-container">
+                                <div class="final-stats">
+                                    <h5>Ваши результаты:</h5>
+                                    <div class="stats-grid">
+                                        <div class="stat-card">
+                                            <div class="stat-value" id="finalDiagnosis">100%</div>
+                                            <div class="stat-label">Точность диагностики</div>
+                                        </div>
+                                        <div class="stat-card">
+                                            <div class="stat-value" id="finalTreatment">100%</div>
+                                            <div class="stat-label">Правильность лечения</div>
+                                        </div>
+                                        <div class="stat-card">
+                                            <div class="stat-value" id="finalPatients">4</div>
+                                            <div class="stat-label">Обработано раненых</div>
+                                        </div>
+                                        <div class="stat-card">
+                                            <div class="stat-value" id="finalSaved">85%</div>
+                                            <div class="stat-label">Вернутся в строй</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="historical-comparison">
+                                    <h5>Сравнение с А.А. Вишневским:</h5>
+                                    <div class="comparison-chart">
+                                        <div class="comparison-item">
+                                            <span class="comparison-label">Ваш результат</span>
+                                            <div class="comparison-bar">
+                                                <div class="bar-fill player" style="width: 85%"></div>
+                                                <span class="bar-value">85%</span>
+                                            </div>
+                                        </div>
+                                        <div class="comparison-item">
+                                            <span class="comparison-label">Вишневский (фронт)</span>
+                                            <div class="comparison-bar">
+                                                <div class="bar-fill historical" style="width: 85%"></div>
+                                                <span class="bar-value">85%</span>
+                                            </div>
+                                        </div>
+                                        <div class="comparison-item">
+                                            <span class="comparison-label">Средний по фронтам</span>
+                                            <div class="comparison-bar">
+                                                <div class="bar-fill average" style="width: 70%"></div>
+                                                <span class="bar-value">70%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="achievement-badge">
+                                        <i class="fas fa-medal"></i>
+                                        <div>
+                                            <h6>Достижение: "Достойный ученик Вишневского"</h6>
+                                            <p>Вы показали результаты на уровне лучших военных хирургов ВОВ!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="historical-facts">
+                                    <div class="fact-card">
+                                        <i class="fas fa-history"></i>
+                                        <div>
+                                            <h6>Исторический факт:</h6>
+                                            <p>А.А. Вишневский лично провел более 5000 операций на фронте. Его система этапного лечения с эвакуацией по назначению позволила вернуть в строй 85% раненых — лучший показатель среди всех фронтов.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="fact-card">
+                                        <i class="fas fa-book-medical"></i>
+                                        <div>
+                                            <h6>Наследие:</h6>
+                                            <p>Методы Вишневского до сих пор изучаются в военно-медицинских академиях. Его "Инструкция для военно-полевых хирургов" стала классикой военной медицины.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="stage-navigation">
+                                <button class="btn-simulator secondary" id="backToOrganization">← Назад</button>
+                                <button class="btn-simulator" id="restartSimulator">Пройти заново</button>
+                                <div class="stage-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 100%"></div>
+                                    </div>
+                                    <span>Этап 4 из 4</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Общие элементы -->
+                        <div class="simulator-instructions">
+                            <p><strong>Как играть:</strong> Пройдите все 4 этапа, принимая решения как военный хирург. Ваша цель — спасти максимальное количество раненых, используя методы А.А. Вишневского.</p>
+                        </div>
+                        
+                        <div class="feedback-message" id="simulatorFeedback"></div>
                     </div>
                 </div>
             </div>
@@ -2880,240 +3376,378 @@
     </div>
 
     <script>
-        // Код для симулятора
+        // JavaScript для нового симулятора
         document.addEventListener('DOMContentLoaded', function() {
+            
+            function getCssVar(name) {
+                return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+            }
+            
+            // Получаем цвета из CSS переменных
+            const accentColor = getCssVar('--accent-color') || '#1976d2';
+            const primaryColor = getCssVar('--primary-color') || '#1a237e';
+            const secondaryColor = getCssVar('--secondary-color') || '#c62828';
             // Элементы симулятора
-            const injectionPoints = document.querySelectorAll('.injection-point');
-            const checkButton = document.getElementById('checkButton');
-            const resetButton = document.getElementById('resetButton');
-            const hintButton = document.getElementById('hintButton');
-            const feedbackMessage = document.getElementById('feedbackMessage');
-            const historicalNote = document.getElementById('historicalNote');
+            const stages = document.querySelectorAll('.simulator-stage');
+            const stage1 = document.getElementById('stage1');
+            const stage2 = document.getElementById('stage2');
+            const stage3 = document.getElementById('stage3');
+            const stage4 = document.getElementById('stage4');
             
-            // Статистика
-            const pointsFoundElement = document.getElementById('pointsFound');
-            const pointsTotalElement = document.getElementById('pointsTotal');
-            const attemptsCountElement = document.getElementById('attemptsCount');
-            const accuracyElement = document.getElementById('accuracy');
+            // Кнопки навигации
+            const confirmDiagnosisBtn = document.getElementById('confirmDiagnosis');
+            const confirmTreatmentBtn = document.getElementById('confirmTreatment');
+            const confirmResourcesBtn = document.getElementById('confirmResources');
+            const restartBtn = document.getElementById('restartSimulator');
             
+            // Кнопки "Назад"
+            const backToDiagnosisBtn = document.getElementById('backToDiagnosis');
+            const backToTreatmentBtn = document.getElementById('backToTreatment');
+            const backToOrganizationBtn = document.getElementById('backToOrganization');
+            
+            // Кнопки опций
+            const diagnosisOptions = document.querySelectorAll('.option-btn[data-diagnosis]');
+            const treatmentOptions = document.querySelectorAll('.treatment-option');
+            
+            // Ресурсы
+            const surgeonsCount = document.getElementById('surgeonsCount');
+            const operatingRoomsCount = document.getElementById('operatingRoomsCount');
+            const medKitsCount = document.getElementById('medKitsCount');
+            const transportCount = document.getElementById('transportCount');
+            
+            // Кнопки управления ресурсами
+            const resourceControls = document.querySelectorAll('.resource-controls button');
+            
+            // Итоговые значения
+            const finalDiagnosis = document.getElementById('finalDiagnosis');
+            const finalTreatment = document.getElementById('finalTreatment');
+            const finalPatients = document.getElementById('finalPatients');
+            const finalSaved = document.getElementById('finalSaved');
+            
+            // Состояние игры
             let gameState = {
-                foundPoints: [],
-                correctPoints: ['1', '2', '4', '7'], // ID правильных точек
-                attempts: 0,
-                clickedPoints: 0,
-                gameCompleted: false
+                currentStage: 1,
+                diagnosis: null,
+                treatment: null,
+                resources: {
+                    surgeons: 4,
+                    operatingRooms: 2,
+                    medKits: 12,
+                    transport: 3
+                },
+                score: {
+                    diagnosis: 100,
+                    treatment: 100,
+                    patients: 4,
+                    saved: 85
+                }
             };
             
             // Инициализация игры
             function initGame() {
                 gameState = {
-                    foundPoints: [],
-                    correctPoints: ['1', '2', '4', '7'],
-                    attempts: 0,
-                    clickedPoints: 0,
-                    gameCompleted: false
+                    currentStage: 1,
+                    diagnosis: null,
+                    treatment: null,
+                    resources: {
+                        surgeons: 4,
+                        operatingRooms: 2,
+                        medKits: 12,
+                        transport: 3
+                    },
+                    score: {
+                        diagnosis: 100,
+                        treatment: 100,
+                        patients: 4,
+                        saved: 85
+                    }
                 };
                 
-                // Сброс всех точек
-                injectionPoints.forEach(point => {
-                    point.classList.remove('clicked');
-                    point.style.opacity = '1';
-                    point.style.cursor = 'pointer';
+                // Сброс выбранных опций
+                diagnosisOptions.forEach(btn => {
+                    btn.classList.remove('selected');
+                    btn.style.backgroundColor = '';
+                    btn.style.borderColor = '';
                 });
                 
-                // Скрыть сообщения
-                feedbackMessage.className = 'feedback-message';
-                feedbackMessage.textContent = '';
-                feedbackMessage.style.display = 'none';
+                treatmentOptions.forEach(btn => {
+                    btn.classList.remove('selected');
+                    btn.style.backgroundColor = '';
+                    btn.style.borderColor = '';
+                });
                 
-                historicalNote.classList.remove('show');
+                // Сброс ресурсов
+                updateResourcesDisplay();
                 
-                // Обновить статистику
-                updateStats();
+                // Показать первый этап
+                showStage(1);
                 
-                // Активировать кнопки
-                checkButton.disabled = false;
-                checkButton.textContent = 'Проверить блокаду';
+                // Скрыть фидбэк
+                const feedback = document.getElementById('simulatorFeedback');
+                feedback.className = 'feedback-message';
+                feedback.textContent = '';
+                feedback.style.display = 'none';
             }
             
-            // Обновление статистики
-            function updateStats() {
-                pointsFoundElement.textContent = gameState.foundPoints.length;
-                attemptsCountElement.textContent = gameState.attempts;
+            // Показать определенный этап
+            function showStage(stageNumber) {
+                stages.forEach(stage => {
+                    stage.classList.remove('active');
+                });
                 
-                const accuracy = gameState.clickedPoints > 0 
-                    ? Math.round((gameState.foundPoints.length / gameState.clickedPoints) * 100) 
-                    : 0;
-                accuracyElement.textContent = `${accuracy}%`;
+                document.getElementById(`stage${stageNumber}`).classList.add('active');
+                gameState.currentStage = stageNumber;
+                
+                // Обновить прогресс-бар
+                const progressFill = document.querySelector('.progress-fill');
+                progressFill.style.width = `${stageNumber * 25}%`;
             }
             
-            // Обработка клика по точке
-            injectionPoints.forEach(point => {
-                point.addEventListener('click', function() {
-                    if (gameState.gameCompleted) return;
+            // Выбор диагноза
+            diagnosisOptions.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Сброс предыдущего выбора
+                    diagnosisOptions.forEach(b => {
+                        b.classList.remove('selected');
+                        b.style.backgroundColor = '';
+                        b.style.borderColor = '';
+                    });
                     
-                    const pointId = this.getAttribute('data-point');
+                    // Выбор нового
+                    this.classList.add('selected');
+                    this.style.backgroundColor = '#e3f2fd';
+                    this.style.borderColor = accentColor; // Используем переменную
                     
-                    // Если точка уже нажата, игнорируем
-                    if (this.classList.contains('clicked')) return;
+                    gameState.diagnosis = this.getAttribute('data-diagnosis');
+                });
+            });
+            
+            // Выбор лечения
+            treatmentOptions.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Сброс предыдущего выбора
+                    treatmentOptions.forEach(b => {
+                        b.classList.remove('selected');
+                        b.style.backgroundColor = '';
+                        b.style.borderColor = '';
+                    });
                     
-                    // Помечаем точку как нажатую
-                    this.classList.add('clicked');
-                    gameState.clickedPoints++;
+                    // Выбор нового
+                    this.classList.add('selected');
+                    this.style.backgroundColor = '#e3f2fd';
+                    this.style.borderColor = accentColor; // Используем переменную
                     
-                    // Проверяем, правильная ли точка
-                    if (gameState.correctPoints.includes(pointId)) {
-                        // Правильная точка
-                        this.classList.add('correct');
-                        this.classList.remove('incorrect');
-                        
-                        if (!gameState.foundPoints.includes(pointId)) {
-                            gameState.foundPoints.push(pointId);
+                    gameState.treatment = this.getAttribute('data-treatment');
+                });
+            });
+            
+            // Управление ресурсами
+            resourceControls.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const resourceItem = this.closest('.resource-item');
+                    const resourceType = resourceItem.querySelector('.resource-name').textContent.toLowerCase();
+                    const countElement = resourceItem.querySelector('.resource-count');
+                    let count = parseInt(countElement.textContent);
+                    
+                    if (this.classList.contains('resource-plus')) {
+                        if (count < 10) {
+                            count++;
+                            updateResource(resourceType, count);
                         }
-                        
-                        // Визуальная обратная связь
-                        showFeedback('Правильно! Вы нашли одну из точек блокады.', 'success');
-                    } else {
-                        // Неправильная точка
-                        this.classList.add('incorrect');
-                        this.classList.remove('correct');
-                        
-                        // Визуальная обратная связь
-                        showFeedback('Неверная точка. Попробуйте еще раз.', 'error');
-                    }
-                    
-                    updateStats();
-                    
-                    // Автоматическая проверка при нахождении всех точек
-                    if (gameState.foundPoints.length === gameState.correctPoints.length) {
-                        setTimeout(() => {
-                            completeGame();
-                        }, 800);
-                    }
-                });
-            });
-            
-            // Проверка блокады
-            checkButton.addEventListener('click', function() {
-                if (gameState.gameCompleted) return;
-                
-                gameState.attempts++;
-                
-                if (gameState.foundPoints.length === gameState.correctPoints.length) {
-                    completeGame();
-                } else {
-                    const remaining = gameState.correctPoints.length - gameState.foundPoints.length;
-                    showFeedback(`Нужно найти еще ${remaining} правильных ${getPluralForm(remaining, 'точку', 'точки', 'точек')}.`, 'info');
-                    updateStats();
-                }
-            });
-            
-            // Сброс игры
-            resetButton.addEventListener('click', initGame);
-            
-            // Подсказка
-            hintButton.addEventListener('click', function() {
-                if (gameState.gameCompleted) return;
-                
-                // Подсветить одну из неправильных точек
-                const incorrectPoints = Array.from(injectionPoints).filter(point => {
-                    const pointId = point.getAttribute('data-point');
-                    return !gameState.correctPoints.includes(pointId) && !point.classList.contains('clicked');
-                });
-                
-                if (incorrectPoints.length > 0) {
-                    const randomPoint = incorrectPoints[Math.floor(Math.random() * incorrectPoints.length)];
-                    
-                    // Мигание для указания неправильной точки
-                    let blinkCount = 0;
-                    const blinkInterval = setInterval(() => {
-                        randomPoint.style.opacity = randomPoint.style.opacity === '0.3' ? '1' : '0.3';
-                        blinkCount++;
-                        
-                        if (blinkCount === 6) {
-                            clearInterval(blinkInterval);
-                            randomPoint.style.opacity = '1';
+                    } else if (this.classList.contains('resource-minus')) {
+                        if (count > 1) {
+                            count--;
+                            updateResource(resourceType, count);
                         }
-                    }, 300);
+                    }
                     
-                    showFeedback('Подсказка: эта точка НЕ подходит для блокады.', 'info');
-                } else {
-                    showFeedback('Все точки уже проверены. Попробуйте начать заново.', 'info');
-                }
+                    countElement.textContent = count;
+                });
             });
             
-            // Завершение игры
-            function completeGame() {
-                gameState.gameCompleted = true;
-                
-                // Подсветить все правильные точки
-                injectionPoints.forEach(point => {
-                    const pointId = point.getAttribute('data-point');
-                    if (gameState.correctPoints.includes(pointId)) {
-                        point.classList.add('correct');
-                        point.classList.remove('incorrect');
-                    }
-                    point.style.cursor = 'default';
-                });
-                
-                // Показать историческую справку
-                historicalNote.classList.add('show');
-                
-                // Обновить кнопку
-                checkButton.disabled = true;
-                checkButton.textContent = 'Блокада выполнена!';
-                
-                // Показать поздравление
-                showFeedback('Поздравляем! Вы успешно выполнили новокаиновую блокаду по методу А.В. Вишневского.', 'success');
-                
-                updateStats();
+            // Обновление ресурсов в состоянии игры
+            function updateResource(type, value) {
+                switch(type) {
+                    case 'хирурги':
+                        gameState.resources.surgeons = value;
+                        break;
+                    case 'операционные':
+                        gameState.resources.operatingRooms = value;
+                        break;
+                    case 'аптечные наборы':
+                        gameState.resources.medKits = value;
+                        break;
+                    case 'санитарный транспорт':
+                        gameState.resources.transport = value;
+                        break;
+                }
             }
+            
+            // Обновление отображения ресурсов
+            function updateResourcesDisplay() {
+                surgeonsCount.textContent = gameState.resources.surgeons;
+                operatingRoomsCount.textContent = gameState.resources.operatingRooms;
+                medKitsCount.textContent = gameState.resources.medKits;
+                transportCount.textContent = gameState.resources.transport;
+            }
+            
+            // Подтверждение диагноза
+            confirmDiagnosisBtn.addEventListener('click', function() {
+                if (!gameState.diagnosis) {
+                    showFeedback('Пожалуйста, выберите диагноз', 'error');
+                    return;
+                }
+                
+                // Проверка правильности диагноза
+                const correctDiagnosis = 'open-pneumothorax';
+                let diagnosisScore = 100;
+                
+                if (gameState.diagnosis !== correctDiagnosis) {
+                    diagnosisScore = 50;
+                    showFeedback('Неверный диагноз! Правильный ответ: Открытый пневмоторакс', 'error');
+                    // Показать правильный ответ
+                    const correctBtn = document.querySelector(`[data-diagnosis="${correctDiagnosis}"]`);
+                    correctBtn.style.backgroundColor = '#d4edda';
+                    correctBtn.style.borderColor = '#c3e6cb';
+                    
+                    // Подсветить неправильный ответ
+                    const selectedBtn = document.querySelector(`[data-diagnosis="${gameState.diagnosis}"]`);
+                    selectedBtn.style.backgroundColor = '#f8d7da';
+                    selectedBtn.style.borderColor = '#f5c6cb';
+                } else {
+                    showFeedback('Верно! Это открытый пневмоторакс', 'success');
+                }
+                
+                gameState.score.diagnosis = diagnosisScore;
+                
+                // Переход к следующему этапу через 1.5 секунды
+                setTimeout(() => {
+                    showStage(2);
+                }, 1500);
+            });
+            
+            // Подтверждение лечения
+            confirmTreatmentBtn.addEventListener('click', function() {
+                if (!gameState.treatment) {
+                    showFeedback('Пожалуйста, выберите метод лечения', 'error');
+                    return;
+                }
+                
+                // Проверка правильности лечения
+                const correctTreatment = 'occlusive';
+                let treatmentScore = 100;
+                
+                if (gameState.treatment !== correctTreatment) {
+                    treatmentScore = 50;
+                    showFeedback('Неверный метод! Для открытого пневмоторакса нужна окклюзионная повязка', 'error');
+                    
+                    // Показать правильный ответ
+                    const correctBtn = document.querySelector(`[data-treatment="${correctTreatment}"]`);
+                    correctBtn.style.backgroundColor = '#d4edda';
+                    correctBtn.style.borderColor = '#c3e6cb';
+                    
+                    // Подсветить неправильный ответ
+                    const selectedBtn = document.querySelector(`[data-treatment="${gameState.treatment}"]`);
+                    selectedBtn.style.backgroundColor = '#f8d7da';
+                    selectedBtn.style.borderColor = '#f5c6cb';
+                } else {
+                    showFeedback('Правильно! Окклюзионная повязка спасет жизнь раненому', 'success');
+                }
+                
+                gameState.score.treatment = treatmentScore;
+                
+                // Переход к следующему этапу через 1.5 секунды
+                setTimeout(() => {
+                    showStage(3);
+                }, 1500);
+            });
+            
+            // Подтверждение организации
+            confirmResourcesBtn.addEventListener('click', function() {
+                // Расчет эффективности на основе ресурсов
+                let efficiency = calculateEfficiency();
+                gameState.score.saved = efficiency;
+                
+                // Обновление итоговых значений
+                updateFinalResults();
+                
+                // Переход к итогам
+                showStage(4);
+            });
+            
+            // Расчет эффективности
+            function calculateEfficiency() {
+                const resources = gameState.resources;
+                let efficiency = 85; // Базовый уровень
+                
+                // Влияние хирургов
+                if (resources.surgeons >= 4) efficiency += 5;
+                else if (resources.surgeons <= 2) efficiency -= 10;
+                
+                // Влияние операционных
+                if (resources.operatingRooms >= 3) efficiency += 5;
+                else if (resources.operatingRooms <= 1) efficiency -= 15;
+                
+                // Влияние аптечных наборов
+                if (resources.medKits >= 10) efficiency += 5;
+                else if (resources.medKits <= 5) efficiency -= 10;
+                
+                // Влияние транспорта
+                if (resources.transport >= 3) efficiency += 5;
+                else if (resources.transport <= 1) efficiency -= 10;
+                
+                // Ограничение 0-100%
+                efficiency = Math.max(0, Math.min(100, efficiency));
+                
+                return Math.round(efficiency);
+            }
+            
+            // Обновление итоговых результатов
+            function updateFinalResults() {
+                finalDiagnosis.textContent = `${gameState.score.diagnosis}%`;
+                finalTreatment.textContent = `${gameState.score.treatment}%`;
+                finalSaved.textContent = `${gameState.score.saved}%`;
+                
+                // Обновление графиков
+                document.querySelector('.bar-fill.player').style.width = `${gameState.score.saved}%`;
+                document.querySelector('.bar-fill.player + .bar-value').textContent = `${gameState.score.saved}%`;
+            }
+            
+            // Кнопки "Назад"
+            backToDiagnosisBtn.addEventListener('click', () => showStage(1));
+            backToTreatmentBtn.addEventListener('click', () => showStage(2));
+            backToOrganizationBtn.addEventListener('click', () => showStage(3));
+            
+            // Перезапуск игры
+            restartBtn.addEventListener('click', initGame);
             
             // Показать обратную связь
             function showFeedback(message, type) {
-                feedbackMessage.textContent = message;
-                feedbackMessage.className = 'feedback-message';
+                const feedback = document.getElementById('simulatorFeedback');
+                feedback.textContent = message;
+                feedback.className = 'feedback-message';
                 
                 switch(type) {
                     case 'success':
-                        feedbackMessage.classList.add('feedback-success');
+                        feedback.classList.add('feedback-success');
                         break;
                     case 'error':
-                        feedbackMessage.classList.add('feedback-error');
+                        feedback.classList.add('feedback-error');
                         break;
                     case 'info':
-                        feedbackMessage.classList.add('feedback-info');
+                        feedback.classList.add('feedback-info');
                         break;
                 }
                 
-                feedbackMessage.style.display = 'block';
+                feedback.style.display = 'block';
                 
-                // Автоскрытие через 4 секунды
+                // Автоскрытие
                 setTimeout(() => {
-                    if (!gameState.gameCompleted) {
-                        feedbackMessage.style.display = 'none';
-                    }
-                }, 4000);
+                    feedback.style.display = 'none';
+                }, 3000);
             }
             
-            // Функция для склонения слов
-            function getPluralForm(number, one, two, five) {
-                let n = Math.abs(number);
-                n %= 100;
-                if (n >= 5 && n <= 20) {
-                    return five;
-                }
-                n %= 10;
-                if (n === 1) {
-                    return one;
-                }
-                if (n >= 2 && n <= 4) {
-                    return two;
-                }
-                return five;
-            }
-            
-            // Инициализация игры при загрузке
+            // Инициализация при загрузке
             initGame();
         });
     </script>
