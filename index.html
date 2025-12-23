@@ -700,6 +700,393 @@
                 padding: 20px;
             }
         }
+        /* Интерактивный симулятор */
+        .simulator-section {
+            background-color: #f8f9fa;
+            padding: 80px 0;
+            border-top: 1px solid #eaeaea;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        .simulator-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .simulator-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 25px 30px;
+            text-align: center;
+        }
+
+        .simulator-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .simulator-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .simulator-body {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .simulator-instructions {
+            text-align: center;
+            max-width: 800px;
+            margin-bottom: 30px;
+            line-height: 1.7;
+            color: var(--text-color);
+        }
+
+        .simulator-game {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .human-scheme {
+            position: relative;
+            width: 300px;
+            height: 500px;
+            background-color: #f5f5f5;
+            border-radius: 15px;
+            border: 3px solid #ddd;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .organ {
+            position: absolute;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .organ:hover {
+            transform: scale(1.05);
+        }
+
+        .organ.kidney {
+            background-color: #7b1fa2;
+            width: 100px;
+            height: 60px;
+            top: 180px;
+            left: 100px;
+        }
+
+        .organ.lung {
+            background-color: #0288d1;
+            width: 120px;
+            height: 80px;
+            top: 120px;
+            left: 90px;
+        }
+
+        .injection-point {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff5722;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px #ff5722, 0 0 10px rgba(255, 87, 34, 0.5);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .injection-point:hover {
+            transform: scale(1.3);
+            box-shadow: 0 0 0 3px white, 0 0 15px rgba(255, 87, 34, 0.8);
+        }
+
+        .injection-point.correct {
+            background-color: #4caf50;
+            box-shadow: 0 0 0 2px #4caf50, 0 0 10px rgba(76, 175, 80, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        .injection-point.incorrect {
+            background-color: #f44336;
+            box-shadow: 0 0 0 2px #f44336;
+        }
+
+        .injection-point.clicked {
+            transform: scale(1.5);
+            box-shadow: 0 0 20px rgba(255, 87, 34, 0.9);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+        }
+
+        .simulator-controls {
+            flex: 1;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .simulator-info {
+            background-color: #f0f7ff;
+            border-left: 4px solid var(--accent-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .info-title {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .simulator-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-box {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border-top: 3px solid var(--primary-color);
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .btn-simulator {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .btn-simulator:hover {
+            background-color: #1565c0;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(21, 101, 192, 0.3);
+        }
+
+        .btn-simulator:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-simulator.secondary {
+            background-color: #6c757d;
+        }
+
+        .btn-simulator.secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .feedback-message {
+            display: none;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: 500;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+
+        .feedback-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+
+        .feedback-info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+            display: block;
+        }
+
+        .historical-note {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin-top: 25px;
+            border-radius: 8px;
+            display: none;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .historical-note.show {
+            display: block;
+        }
+
+        .note-title {
+            font-weight: 700;
+            color: #856404;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .note-text {
+            line-height: 1.6;
+            color: #856404;
+        }
+
+        /* Анатомические линии на схеме */
+        .anatomy-line {
+            position: absolute;
+            background-color: #bdbdbd;
+        }
+
+        .spine {
+            width: 8px;
+            height: 400px;
+            top: 50px;
+            left: 146px;
+            background-color: #757575;
+            border-radius: 4px;
+        }
+
+        .rib {
+            width: 120px;
+            height: 4px;
+            background-color: #9e9e9e;
+            border-radius: 2px;
+        }
+
+        .rib-1 { top: 100px; left: 90px; transform: rotate(5deg); }
+        .rib-2 { top: 130px; left: 85px; transform: rotate(10deg); }
+        .rib-3 { top: 160px; left: 85px; transform: rotate(15deg); }
+        .rib-4 { top: 190px; left: 90px; transform: rotate(20deg); }
+
+        .rib-5 { top: 100px; left: 178px; transform: rotate(-5deg); }
+        .rib-6 { top: 130px; left: 183px; transform: rotate(-10deg); }
+        .rib-7 { top: 160px; left: 183px; transform: rotate(-15deg); }
+        .rib-8 { top: 190px; left: 178px; transform: rotate(-20deg); }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .simulator-game {
+                flex-direction: column;
+            }
+            
+            .human-scheme {
+                width: 280px;
+                height: 450px;
+            }
+            
+            .organ.kidney {
+                top: 160px;
+                left: 90px;
+            }
+            
+            .organ.lung {
+                top: 100px;
+                left: 80px;
+            }
+            
+            .simulator-controls {
+                max-width: 100%;
+            }
+            
+            .simulator-title {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .human-scheme {
+                width: 250px;
+                height: 400px;
+            }
+            
+            .organ {
+                font-size: 0.8rem;
+            }
+            
+            .organ.kidney {
+                width: 80px;
+                height: 50px;
+                top: 150px;
+                left: 85px;
+            }
+            
+            .organ.lung {
+                width: 100px;
+                height: 65px;
+                top: 90px;
+                left: 75px;
+            }
+            
+            .injection-point {
+                width: 16px;
+                height: 16px;
+            }
+            
+            .simulator-stats {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -949,7 +1336,91 @@
                 </div>
             </div>
         </section>
-    </main>
+        <section id="simulator" class="simulator-section">
+            <div class="container">
+                <h2 class="section-title">Интерактивный симулятор</h2>
+                <div class="simulator-container">
+                    <div class="simulator-header">
+                        <h3 class="simulator-title">Сделай блокаду</h3>
+                        <div class="simulator-subtitle">Примените метод новокаиновой блокады А.В. Вишневского</div>
+                    </div>
+                    
+                    <div class="simulator-body">
+                        <div class="simulator-instructions">
+                            <p><strong>Задача:</strong> Определите правильные точки для введения новокаина по методу А.В. Вишневского для проведения блокады почки.</p>
+                            <p>Кликайте на точки инъекций на схеме. Зеленые точки — правильные, красные — неправильные. Нужно найти все 4 правильные точки для успешного выполнения блокады.</p>
+                        </div>
+                        
+                        <div class="simulator-game">
+                            <div class="human-scheme">
+                                <!-- Анатомические элементы -->
+                                <div class="spine"></div>
+                                <div class="rib rib-1"></div>
+                                <div class="rib rib-2"></div>
+                                <div class="rib rib-3"></div>
+                                <div class="rib rib-4"></div>
+                                <div class="rib rib-5"></div>
+                                <div class="rib rib-6"></div>
+                                <div class="rib rib-7"></div>
+                                <div class="rib rib-8"></div>
+                                
+                                <!-- Органы -->
+                                <div class="organ kidney" data-organ="kidney">Почка</div>
+                                <div class="organ lung" data-organ="lung">Легкое</div>
+                                
+                                <!-- Точки инъекций (правильные и неправильные) -->
+                                <div class="injection-point correct" style="top: 170px; left: 80px;" data-point="1"></div>
+                                <div class="injection-point correct" style="top: 190px; left: 75px;" data-point="2"></div>
+                                <div class="injection-point incorrect" style="top: 140px; left: 140px;" data-point="3"></div>
+                                <div class="injection-point correct" style="top: 200px; left: 120px;" data-point="4"></div>
+                                <div class="injection-point incorrect" style="top: 160px; left: 200px;" data-point="5"></div>
+                                <div class="injection-point incorrect" style="top: 220px; left: 160px;" data-point="6"></div>
+                                <div class="injection-point correct" style="top: 220px; left: 100px;" data-point="7"></div>
+                                <div class="injection-point incorrect" style="top: 180px; left: 160px;" data-point="8"></div>
+                            </div>
+                            
+                            <div class="simulator-controls">
+                                <div class="simulator-info">
+                                    <div class="info-title">Метод новокаиновой блокады</div>
+                                    <p>Александр Васильевич Вишневский разработал этот метод в 1920-х годах. Блокада позволяет обезболить конкретную область без общего наркоза, что особенно важно в полевых условиях.</p>
+                                </div>
+                                
+                                <div class="simulator-stats">
+                                    <div class="stat-box">
+                                        <div class="stat-value" id="pointsFound">0</div>
+                                        <div class="stat-label">Найдено точек</div>
+                                    </div>
+                                    <div class="stat-box">
+                                        <div class="stat-value" id="pointsTotal">4</div>
+                                        <div class="stat-label">Всего нужно</div>
+                                    </div>
+                                    <div class="stat-box">
+                                        <div class="stat-value" id="attemptsCount">0</div>
+                                        <div class="stat-label">Попыток</div>
+                                    </div>
+                                    <div class="stat-box">
+                                        <div class="stat-value" id="accuracy">0%</div>
+                                        <div class="stat-label">Точность</div>
+                                    </div>
+                                </div>
+                                
+                                <div class="feedback-message" id="feedbackMessage"></div>
+                                
+                                <button class="btn-simulator" id="checkButton">Проверить блокаду</button>
+                                <button class="btn-simulator secondary" id="resetButton">Начать заново</button>
+                                <button class="btn-simulator secondary" id="hintButton">Подсказка</button>
+                                
+                                <div class="historical-note" id="historicalNote">
+                                    <div class="note-title">Историческая справка</div>
+                                    <p class="note-text">Вы успешно применили принцип новокаиновой блокады А.В. Вишневского. Его сын, Александр Александрович Вишневский, использовал этот метод в 1945 году для лечения авитаминоза у солдат на Дальнем Востоке. Блокада помогала улучшить кровоснабжение тканей и способствовала быстрому восстановлению организма даже в сложных полевых условиях.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>    
+    </main> 
 
     <!-- Footer -->
     <footer>
@@ -1340,6 +1811,244 @@
         <div class="modal-caption" id="modalCaption"></div>
     </div>
 
+    <script>
+        // Код для симулятора
+        document.addEventListener('DOMContentLoaded', function() {
+            // Элементы симулятора
+            const injectionPoints = document.querySelectorAll('.injection-point');
+            const checkButton = document.getElementById('checkButton');
+            const resetButton = document.getElementById('resetButton');
+            const hintButton = document.getElementById('hintButton');
+            const feedbackMessage = document.getElementById('feedbackMessage');
+            const historicalNote = document.getElementById('historicalNote');
+            
+            // Статистика
+            const pointsFoundElement = document.getElementById('pointsFound');
+            const pointsTotalElement = document.getElementById('pointsTotal');
+            const attemptsCountElement = document.getElementById('attemptsCount');
+            const accuracyElement = document.getElementById('accuracy');
+            
+            let gameState = {
+                foundPoints: [],
+                correctPoints: ['1', '2', '4', '7'], // ID правильных точек
+                attempts: 0,
+                clickedPoints: 0,
+                gameCompleted: false
+            };
+            
+            // Инициализация игры
+            function initGame() {
+                gameState = {
+                    foundPoints: [],
+                    correctPoints: ['1', '2', '4', '7'],
+                    attempts: 0,
+                    clickedPoints: 0,
+                    gameCompleted: false
+                };
+                
+                // Сброс всех точек
+                injectionPoints.forEach(point => {
+                    point.classList.remove('clicked');
+                    point.style.opacity = '1';
+                    point.style.cursor = 'pointer';
+                });
+                
+                // Скрыть сообщения
+                feedbackMessage.className = 'feedback-message';
+                feedbackMessage.textContent = '';
+                feedbackMessage.style.display = 'none';
+                
+                historicalNote.classList.remove('show');
+                
+                // Обновить статистику
+                updateStats();
+                
+                // Активировать кнопки
+                checkButton.disabled = false;
+                checkButton.textContent = 'Проверить блокаду';
+            }
+            
+            // Обновление статистики
+            function updateStats() {
+                pointsFoundElement.textContent = gameState.foundPoints.length;
+                attemptsCountElement.textContent = gameState.attempts;
+                
+                const accuracy = gameState.clickedPoints > 0 
+                    ? Math.round((gameState.foundPoints.length / gameState.clickedPoints) * 100) 
+                    : 0;
+                accuracyElement.textContent = `${accuracy}%`;
+            }
+            
+            // Обработка клика по точке
+            injectionPoints.forEach(point => {
+                point.addEventListener('click', function() {
+                    if (gameState.gameCompleted) return;
+                    
+                    const pointId = this.getAttribute('data-point');
+                    
+                    // Если точка уже нажата, игнорируем
+                    if (this.classList.contains('clicked')) return;
+                    
+                    // Помечаем точку как нажатую
+                    this.classList.add('clicked');
+                    gameState.clickedPoints++;
+                    
+                    // Проверяем, правильная ли точка
+                    if (gameState.correctPoints.includes(pointId)) {
+                        // Правильная точка
+                        this.classList.add('correct');
+                        this.classList.remove('incorrect');
+                        
+                        if (!gameState.foundPoints.includes(pointId)) {
+                            gameState.foundPoints.push(pointId);
+                        }
+                        
+                        // Визуальная обратная связь
+                        showFeedback('Правильно! Вы нашли одну из точек блокады.', 'success');
+                    } else {
+                        // Неправильная точка
+                        this.classList.add('incorrect');
+                        this.classList.remove('correct');
+                        
+                        // Визуальная обратная связь
+                        showFeedback('Неверная точка. Попробуйте еще раз.', 'error');
+                    }
+                    
+                    updateStats();
+                    
+                    // Автоматическая проверка при нахождении всех точек
+                    if (gameState.foundPoints.length === gameState.correctPoints.length) {
+                        setTimeout(() => {
+                            completeGame();
+                        }, 800);
+                    }
+                });
+            });
+            
+            // Проверка блокады
+            checkButton.addEventListener('click', function() {
+                if (gameState.gameCompleted) return;
+                
+                gameState.attempts++;
+                
+                if (gameState.foundPoints.length === gameState.correctPoints.length) {
+                    completeGame();
+                } else {
+                    const remaining = gameState.correctPoints.length - gameState.foundPoints.length;
+                    showFeedback(`Нужно найти еще ${remaining} правильных ${getPluralForm(remaining, 'точку', 'точки', 'точек')}.`, 'info');
+                    updateStats();
+                }
+            });
+            
+            // Сброс игры
+            resetButton.addEventListener('click', initGame);
+            
+            // Подсказка
+            hintButton.addEventListener('click', function() {
+                if (gameState.gameCompleted) return;
+                
+                // Подсветить одну из неправильных точек
+                const incorrectPoints = Array.from(injectionPoints).filter(point => {
+                    const pointId = point.getAttribute('data-point');
+                    return !gameState.correctPoints.includes(pointId) && !point.classList.contains('clicked');
+                });
+                
+                if (incorrectPoints.length > 0) {
+                    const randomPoint = incorrectPoints[Math.floor(Math.random() * incorrectPoints.length)];
+                    
+                    // Мигание для указания неправильной точки
+                    let blinkCount = 0;
+                    const blinkInterval = setInterval(() => {
+                        randomPoint.style.opacity = randomPoint.style.opacity === '0.3' ? '1' : '0.3';
+                        blinkCount++;
+                        
+                        if (blinkCount === 6) {
+                            clearInterval(blinkInterval);
+                            randomPoint.style.opacity = '1';
+                        }
+                    }, 300);
+                    
+                    showFeedback('Подсказка: эта точка НЕ подходит для блокады.', 'info');
+                } else {
+                    showFeedback('Все точки уже проверены. Попробуйте начать заново.', 'info');
+                }
+            });
+            
+            // Завершение игры
+            function completeGame() {
+                gameState.gameCompleted = true;
+                
+                // Подсветить все правильные точки
+                injectionPoints.forEach(point => {
+                    const pointId = point.getAttribute('data-point');
+                    if (gameState.correctPoints.includes(pointId)) {
+                        point.classList.add('correct');
+                        point.classList.remove('incorrect');
+                    }
+                    point.style.cursor = 'default';
+                });
+                
+                // Показать историческую справку
+                historicalNote.classList.add('show');
+                
+                // Обновить кнопку
+                checkButton.disabled = true;
+                checkButton.textContent = 'Блокада выполнена!';
+                
+                // Показать поздравление
+                showFeedback('Поздравляем! Вы успешно выполнили новокаиновую блокаду по методу А.В. Вишневского.', 'success');
+                
+                updateStats();
+            }
+            
+            // Показать обратную связь
+            function showFeedback(message, type) {
+                feedbackMessage.textContent = message;
+                feedbackMessage.className = 'feedback-message';
+                
+                switch(type) {
+                    case 'success':
+                        feedbackMessage.classList.add('feedback-success');
+                        break;
+                    case 'error':
+                        feedbackMessage.classList.add('feedback-error');
+                        break;
+                    case 'info':
+                        feedbackMessage.classList.add('feedback-info');
+                        break;
+                }
+                
+                feedbackMessage.style.display = 'block';
+                
+                // Автоскрытие через 4 секунды
+                setTimeout(() => {
+                    if (!gameState.gameCompleted) {
+                        feedbackMessage.style.display = 'none';
+                    }
+                }, 4000);
+            }
+            
+            // Функция для склонения слов
+            function getPluralForm(number, one, two, five) {
+                let n = Math.abs(number);
+                n %= 100;
+                if (n >= 5 && n <= 20) {
+                    return five;
+                }
+                n %= 10;
+                if (n === 1) {
+                    return one;
+                }
+                if (n >= 2 && n <= 4) {
+                    return two;
+                }
+                return five;
+            }
+            
+            // Инициализация игры при загрузке
+            initGame();
+        });
+    </script>
     <script>
         // Mobile menu toggle
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
